@@ -26,7 +26,7 @@ public class CreditCheckEndpointIntegrationTest {
     public void testStatusOkIfBodyPayloadIsCorrect() throws Exception {
         String body = "{\"referenceId\": \"Bob\", \"companyId\" : \"Acme-XYZ\"}";
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/credit-check")
+        mockMvc.perform(MockMvcRequestBuilders.post("/credit-check")
                 .content(body)
                 .contentType(APPLICATION_JSON_VALUE))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -38,7 +38,7 @@ public class CreditCheckEndpointIntegrationTest {
     public void testBadRequestIfReferenceIdIsMissing() throws Exception {
         String body = "{\"referenceId\": \"\", \"companyId\" : \"bob@domain.com\"}";
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/credit-check")
+        mockMvc.perform(MockMvcRequestBuilders.post("/credit-check")
                 .content(body)
                 .contentType(APPLICATION_JSON_VALUE))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())

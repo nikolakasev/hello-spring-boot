@@ -3,6 +3,7 @@ package com.example.demo.restservice;
 import com.example.demo.domain.CreditCheck;
 import com.example.demo.domain.Result;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -14,14 +15,14 @@ import java.util.Map;
 
 @RestController
 public class CreditCheckEndpoint {
-    @GetMapping("/credit-check")
+    @PostMapping("/credit-check")
     public Result get(@Valid @RequestBody CreditCheck creditCheck) {
         return new Result(creditCheck.getReferenceId(), Collections.emptyList(), -1);
     }
 
     @GetMapping("/")
-    public String health() {
-        return "OK";
+    public ResponseEntity health() {
+        return ResponseEntity.ok("OK");
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
